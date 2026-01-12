@@ -1,0 +1,57 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Footer = () => {
+  return (
+    <footer className="py-16 px-6 bg-gradient-to-b from-primary via-[#0f1a16] to-[#070b0a] text-white/80 border-t border-white/10">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div className="flex items-center space-x-3 mb-6">
+              <img 
+                src="/lgo.png" 
+                alt="Bella Vita Logo" 
+                className="h-10 w-auto object-contain brightness-0 invert opacity-90" 
+              />
+              <h3 className="text-xl font-medium text-white">Bella Vita</h3>
+            </div>
+            <p className="text-white/60 text-sm">
+              Your sanctuary for luxury wellness and rejuvenation in the heart of the city.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-medium text-white mb-4">Services</h4>
+            <ul className="space-y-2 text-sm text-white/60">
+              <li><Link to="/services" className="hover:text-primary transition-colors">Massage Therapy</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">Facial Treatments</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">Body Treatments</Link></li>
+              <li><Link to="/services" className="hover:text-primary transition-colors">Wellness Packages</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-medium text-white mb-4">Company</h4>
+            <ul className="space-y-2 text-sm text-white/60">
+              <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/membership" className="hover:text-primary transition-colors">Membership</Link></li>
+              <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Gift Cards</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-medium text-white mb-4">Contact</h4>
+            <div className="space-y-2 text-sm text-white/60">
+              <p>123 Rue de Luxe, Paris</p>
+              <p>+33 1 23 45 67 89</p>
+              <p>hello@lateliersecret.com</p>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-white/5 pt-8 text-center text-sm text-white/40">
+          <p>&copy; 2024 Bella Vita Medi Spa. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

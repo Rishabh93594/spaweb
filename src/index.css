@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070b0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a2f28;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1e3a31;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1a2f28 #070b0a;
+}
+
+/* Bella Vita Medi Spa - Luxury Design System
+   Sophisticated green, rose gold, and earthy tones for a high-end, polished aesthetic
+   All colors MUST be HSL for proper theming
+*/
+
+@layer base {
+  :root {
+    /* Core Background & Text - Warm Cream (noticeable, not white) */
+    --background: 38 45% 93%;
+    /* Noticeably warm cream */
+    --foreground: 152 25% 18%;
+    /* Deep forest green text */
+
+    /* Card & Surface Elements */
+    --card: 38 35% 94%;
+    /* Cream cards */
+    --card-foreground: 152 25% 18%;
+    --popover: 38 35% 94%;
+    --popover-foreground: 152 25% 18%;
+
+    /* Primary Brand - Deep Luxury Green (Dominant) */
+    --primary: 152 25% 28%;
+    /* Rich forest green - dominant */
+    --primary-foreground: 42 30% 96%;
+    --primary-muted: 152 15% 92%;
+    /* Very light sage for subtle backgrounds */
+
+    /* Secondary - Warm cream */
+    --secondary: 40 20% 93%;
+    --secondary-foreground: 152 25% 18%;
+    --secondary-accent: 42 18% 90%;
+
+    /* Accent - Rose Gold */
+    --accent: 12 35% 68%;
+    /* Elegant rose gold */
+    --accent-foreground: 152 25% 18%;
+
+    /* Muted Tones */
+    --muted: 42 18% 94%;
+    --muted-foreground: 152 12% 40%;
+
+    /* Status Colors */
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 42 30% 96%;
+    --success: 152 35% 40%;
+    --success-foreground: 42 30% 96%;
+
+    /* Borders & Inputs */
+    --border: 42 15% 88%;
+    --input: 42 18% 93%;
+    --ring: 152 25% 28%;
+
+    /* Luxury Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(152 25% 28%) 0%, hsl(152 22% 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(12 35% 68% / 0.15) 0%, hsl(42 30% 96%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(152 25% 28% / 0.05) 0%, hsl(12 35% 68% / 0.04) 50%, hsl(42 30% 96%) 100%);
+
+    /* Elegant Shadows - Green-tinted for cohesion */
+    --shadow-soft: 0 2px 15px -2px hsl(152 25% 28% / 0.06);
+    --shadow-medium: 0 8px 25px -4px hsl(152 25% 28% / 0.10);
+    --shadow-luxury: 0 20px 40px -8px hsl(152 25% 28% / 0.12);
+
+    /* Layout */
+    --radius: 0.5rem;
+    /* Refined, subtle corners */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 152 25% 18%;
+    --sidebar-primary: 152 25% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 6% 97%;
+    --sidebar-accent-foreground: 152 25% 18%;
+    --sidebar-border: 150 10% 92%;
+    --sidebar-ring: 152 25% 28%;
+  }
+
+  .dark {
+    /* Dark mode - Deep forest ambiance */
+    --background: 152 20% 7%;
+    /* Deep forest night */
+    --foreground: 40 15% 95%;
+    /* Warm white text */
+    --card: 152 18% 10%;
+    --card-foreground: 40 15% 95%;
+    --popover: 152 18% 10%;
+    --popover-foreground: 40 15% 95%;
+    --primary: 152 30% 50%;
+    /* Brighter green for visibility */
+    --primary-foreground: 152 20% 7%;
+    --primary-muted: 152 20% 20%;
+    --secondary: 152 15% 12%;
+    --secondary-foreground: 40 15% 95%;
+    --secondary-accent: 152 12% 18%;
+    --accent: 12 25% 55%;
+    /* Muted rose gold for dark */
+    --accent-foreground: 40 15% 95%;
+    --muted: 152 12% 14%;
+    --muted-foreground: 40 12% 65%;
+    --border: 152 12% 18%;
+    --input: 152 12% 16%;
+    --ring: 152 30% 50%;
+    --gradient-hero: linear-gradient(135deg, hsl(152 30% 50% / 0.12) 0%, hsl(12 25% 55% / 0.06) 50%, hsl(152 20% 7%) 100%);
+    --sidebar-background: 152 18% 10%;
+    --sidebar-foreground: 40 15% 95%;
+    --sidebar-primary: 152 30% 50%;
+    --sidebar-primary-foreground: 152 20% 7%;
+    --sidebar-accent: 152 12% 14%;
+    --sidebar-accent-foreground: 40 15% 95%;
+    --sidebar-border: 152 12% 18%;
+    --sidebar-ring: 152 30% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Global Body Styles - SHA Method Inspiration */
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    font-weight: 300;
+    /* Light weight is key for refined look */
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+  }
+
+  /* Typography Hierarchy - Serif Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground font-sans;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  /* Navigation Labels - Strict Global Rule */
+  nav a,
+  nav button,
+  .nav-item {
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    font-size: 0.75rem;
+  }
+
+  /* Utility for labels/badges */
+  .text-sha-caps {
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+
+  /* Luxury Animation Classes */
+  .animate-gentle-fade {
+    animation: gentleFade 0.8s ease-out;
+  }
+
+  .animate-elegant-slide {
+    animation: elegantSlide 1s ease-out;
+  }
+
+  .animate-luxury-scale {
+    animation: luxuryScale 0.6s ease-out;
+  }
+}
+
+/* Luxury Animations */
+@keyframes gentleFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes elegantSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes luxuryScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
