@@ -104,8 +104,8 @@ const Booking = () => {
                         row: "flex w-full mt-3 gap-2",
                         cell: "h-16 w-16 text-center text-base p-0 relative [&:has([aria-selected])]:bg-transparent",
                         day: "h-16 w-16 p-0 font-bold text-stone-800 aria-selected:opacity-100 hover:bg-amber-100 rounded-2xl transition-all border border-transparent shadow-sm bg-white/50",
-                        day_selected: "bg-amber-600 !text-white hover:bg-amber-700 shadow-xl shadow-amber-600/40 scale-110 z-10 border-amber-500",
-                        day_today: "bg-stone-100 !text-black font-black border-2 border-amber-400",
+                        day_selected: "!bg-amber-600 !text-white hover:!bg-amber-700 shadow-xl shadow-amber-600/40 scale-110 z-10 border-amber-500",
+                        day_today: "!text-black font-black border-2 border-amber-400",
                         day_outside: "text-stone-400 opacity-40",
                         day_disabled: "text-stone-400 opacity-80 cursor-not-allowed bg-stone-50/50",
                       }}
