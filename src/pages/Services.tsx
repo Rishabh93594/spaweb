@@ -3,12 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Clock, Star, Heart, Filter, Search, Sparkles, Crown, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -53,6 +53,16 @@ import cellulite1 from '@/assets/cellulite_1_1767936895218.png';
 import cellulite2 from '@/assets/cellulite_2_1767936914026.png';
 import cellulite3 from '@/assets/cellulite_3_1767936931343.png';
 
+// New Service Assets
+import postOpBbl from '@/assets/post_op_bbl.png';
+import microNeedling from '@/assets/micro_needling.png';
+import facialsNew from '@/assets/facials_new.png';
+import laserServices from '@/assets/laser_services.png';
+import skinCare from '@/assets/skin_care.png';
+import introLymphatic from '@/assets/intro_lymphatic.png';
+import celluliteNew from '@/assets/cellulite_new.png';
+import massageServicesNew from '@/assets/massage_services_new.png';
+
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -64,9 +74,9 @@ const Services = () => {
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterDuration, setFilterDuration] = useState('all');
   const [filterPrice, setFilterPrice] = useState('all');
-  
+
   const headerRef = useRef<HTMLElement>(null);
-   const filterRef = useRef<HTMLElement>(null);
+  const filterRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const decorationRef = useRef<HTMLDivElement>(null);
 
@@ -77,12 +87,12 @@ const Services = () => {
       if (headerElements) {
         gsap.fromTo(headerElements,
           { opacity: 0, y: 30 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1.2, 
-            stagger: 0.2, 
-            ease: "power3.out" 
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out"
           }
         );
       }
@@ -90,12 +100,12 @@ const Services = () => {
       // Filter Bar Animation
       gsap.fromTo(filterRef.current,
         { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 1, 
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
           delay: 0.6,
-          ease: "power2.out" 
+          ease: "power2.out"
         }
       );
 
@@ -114,7 +124,7 @@ const Services = () => {
             scrollTrigger: {
               trigger: cardsRef.current,
               start: "top 85%",
-             }
+            }
           }
         );
       }
@@ -136,6 +146,96 @@ const Services = () => {
 
   const services = [
     {
+      id: 'post-op-bbl',
+      name: 'Post-Op Lymphatic Drainage BBL',
+      category: 'body',
+      description: 'Specialized lymphatic drainage therapy designed for post-operative recovery (BBL) to reduce swelling and improve healing.',
+      duration: '60 min',
+      price: 180,
+      images: [postOpBbl],
+      popular: true,
+      rating: 4.9
+    },
+    {
+      id: 'micro-needling',
+      name: 'Micro-needling',
+      category: 'facial',
+      description: 'Collagen induction therapy to improve skin texture, reduce scarring, and rejuvenate your complexion.',
+      duration: '75 min',
+      price: 220,
+      images: [microNeedling],
+      popular: false,
+      rating: 4.8
+    },
+    {
+      id: 'advanced-facials',
+      name: 'Advanced Facials',
+      category: 'facial',
+      description: 'Customized luxury facial treatments using premium products to address specific skin concerns and enhance radiance.',
+      duration: '60 min',
+      price: 130,
+      images: [facialsNew],
+      popular: false,
+      rating: 4.7
+    },
+    {
+      id: 'intro-post-op',
+      name: 'Introductory Post-Op Lymphatic Massage',
+      category: 'massage',
+      description: 'A preliminary clinical massage to introduce your body to the lymphatic drainage process after surgery.',
+      duration: '45 min',
+      price: 110,
+      images: [introLymphatic],
+      popular: false,
+      rating: 4.6
+    },
+    {
+      id: 'laser-services',
+      name: 'Laser Services',
+      category: 'facial',
+      description: 'Cutting-edge laser technology for skin rejuvenation, hair removal, and precision aesthetic treatments.',
+      duration: '45 min',
+      price: 150,
+      images: [laserServices],
+      popular: true,
+      rating: 4.9,
+      hasArrowButton: true
+    },
+    {
+      id: 'skin-care',
+      name: 'Skin Care',
+      category: 'body',
+      description: 'Comprehensive skin care regimens and professional applications for total body wellness and luminosity.',
+      duration: '60 min',
+      price: 140,
+      images: [skinCare],
+      popular: false,
+      rating: 4.8,
+      hasArrowButton: true
+    },
+    {
+      id: 'cellulite-reduction-therapy',
+      name: 'Cellulite Reduction Therapy',
+      category: 'body',
+      description: 'Advanced non-invasive therapy targeting cellulite to smooth skin texture and contour the body.',
+      duration: '90 min',
+      price: 175,
+      images: [celluliteNew],
+      popular: false,
+      rating: 4.5
+    },
+    {
+      id: 'massage-services',
+      name: 'Massage Services',
+      category: 'massage',
+      description: 'Our full suite of restorative massage techniques tailored to your specific relaxation and therapeutic needs.',
+      duration: '60 min',
+      price: 120,
+      images: [massageServicesNew],
+      popular: true,
+      rating: 4.9
+    },
+    {
       id: 'signature-massage',
       name: 'Signature Swedish Massage',
       category: 'massage',
@@ -149,7 +249,7 @@ const Services = () => {
     {
       id: 'deep-tissue-massage',
       name: 'Deep Tissue Therapy',
-      category: 'massage', 
+      category: 'massage',
       description: 'Intensive therapeutic massage targeting muscle tension and stress points',
       duration: '90 min',
       price: 160,
@@ -238,24 +338,24 @@ const Services = () => {
 
   const filteredServices = services.filter(service => {
     const matchesSearch = service.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         service.description.toLowerCase().includes(searchTerm.toLowerCase());
+      service.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filterCategory === 'all' || service.category === filterCategory;
-    const matchesDuration = filterDuration === 'all' || 
-                           (filterDuration === 'short' && parseInt(service.duration) <= 60) ||
-                           (filterDuration === 'medium' && parseInt(service.duration) > 60 && parseInt(service.duration) <= 90) ||
-                           (filterDuration === 'long' && parseInt(service.duration) > 90);
+    const matchesDuration = filterDuration === 'all' ||
+      (filterDuration === 'short' && parseInt(service.duration) <= 60) ||
+      (filterDuration === 'medium' && parseInt(service.duration) > 60 && parseInt(service.duration) <= 90) ||
+      (filterDuration === 'long' && parseInt(service.duration) > 90);
     const matchesPrice = filterPrice === 'all' ||
-                        (filterPrice === 'low' && service.price <= 100) ||
-                        (filterPrice === 'medium' && service.price > 100 && service.price <= 150) ||
-                        (filterPrice === 'high' && service.price > 150);
-    
+      (filterPrice === 'low' && service.price <= 100) ||
+      (filterPrice === 'medium' && service.price > 100 && service.price <= 150) ||
+      (filterPrice === 'high' && service.price > 150);
+
     return matchesSearch && matchesCategory && matchesDuration && matchesPrice;
   });
 
   return (
     <div className="min-h-screen bg-gradient-hero overflow-x-hidden">
       <Navbar forceOpaque={true} />
-      
+
       {/* Cinematic Header */}
       <section ref={headerRef} className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="max-w-7xl mx-auto text-center">
@@ -286,13 +386,13 @@ const Services = () => {
                 className="w-full pl-11 pr-4 py-3 bg-white/50 border border-border/50 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-muted-foreground/50"
               />
             </div>
-            
+
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Filter className="h-4 w-4" />
                 <span className="text-xs uppercase tracking-widest font-medium">Refine:</span>
               </div>
-              
+
               <Select value={filterCategory} onValueChange={setFilterCategory}>
                 <SelectTrigger className="w-44 bg-white/50 border-border/50 rounded-full h-11 text-xs tracking-widest uppercase">
                   <SelectValue placeholder="Category" />
@@ -338,8 +438,8 @@ const Services = () => {
         <div className="max-w-7xl mx-auto">
           <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredServices.map((service) => (
-              <Card 
-                key={service.id} 
+              <Card
+                key={service.id}
                 className="service-card group hover:shadow-luxury transition-all duration-700 border-0 bg-white/40 backdrop-blur-sm overflow-hidden flex flex-col h-full rounded-2xl"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
@@ -355,8 +455,8 @@ const Services = () => {
                     <CarouselContent className="h-full">
                       {service.images.map((img, index) => (
                         <CarouselItem key={index} className="h-full pl-0">
-                          <img 
-                            src={img} 
+                          <img
+                            src={img}
                             alt={`${service.name} view ${index + 1}`}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
                           />
@@ -364,7 +464,7 @@ const Services = () => {
                       ))}
                     </CarouselContent>
                     <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-700"></div>
-                    
+
                     <div className="absolute inset-x-0 bottom-4 flex justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {service.images.map((_, i) => (
                         <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/50" />
@@ -378,7 +478,7 @@ const Services = () => {
                       <CarouselNext className="relative right-0 translate-x-0 bg-white/20 backdrop-blur-md border-0 text-white hover:bg-white/40 h-8 w-8" />
                     </div>
                   </Carousel>
-                  
+
                   <div className="absolute top-4 left-4 flex flex-col gap-2 z-10 pointer-events-none">
                     {service.popular && (
                       <Badge className="bg-primary/90 backdrop-blur-md text-white border-0 text-[0.6rem] py-1 px-3 tracking-widest uppercase rounded-full">
@@ -389,7 +489,7 @@ const Services = () => {
                       {service.category}
                     </Badge>
                   </div>
-                  
+
                   <div className="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-10 pointer-events-none">
                     <div className="flex items-center gap-1.5 bg-white/90 backdrop-blur-md rounded-full px-3 py-1.5 shadow-soft">
                       <Star className="w-3.5 h-3.5 text-accent fill-current" />
@@ -397,18 +497,18 @@ const Services = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-col flex-grow p-8">
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl text-foreground font-normal leading-tight group-hover:text-primary transition-colors duration-300">
                       {service.name}
                     </h3>
                   </div>
-                  
+
                   <p className="text-muted-foreground text-sm font-light leading-relaxed mb-8 flex-grow">
                     {service.description}
                   </p>
-                  
+
                   <div className="flex items-center justify-between py-6 border-t border-border/30">
                     <div className="flex items-center text-xs text-muted-foreground uppercase tracking-widest font-medium">
                       <Clock className="w-4 h-4 mr-2 text-primary/50" />
@@ -418,12 +518,21 @@ const Services = () => {
                       €{service.price}
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-3">
                     <Button variant="hero" className="flex-1 rounded-full h-12 shadow-soft hover:shadow-medium transition-all duration-500 group/btn" asChild>
                       <Link to={`/booking?service=${service.id}`} className="flex items-center justify-center">
-                        Book Ritual
-                        <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300" />
+                        {service.hasArrowButton ? (
+                          <>
+                            Explore Service
+                            <ArrowRight className="w-4 h-4 ml-2 transition-all duration-300" />
+                          </>
+                        ) : (
+                          <>
+                            Book Ritual
+                            <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300" />
+                          </>
+                        )}
                       </Link>
                     </Button>
                     <Button variant="luxury" size="icon" className="rounded-full w-12 h-12 border-border/50 hover:bg-accent hover:text-white transition-all duration-500">
@@ -442,8 +551,8 @@ const Services = () => {
               </div>
               <h3 className="text-2xl font-light text-foreground mb-3">No rituals found matching your criteria.</h3>
               <p className="text-muted-foreground mb-8">Try adjusting your filters to find your perfect treatment.</p>
-              <Button 
-                variant="luxury" 
+              <Button
+                variant="luxury"
                 className="rounded-full px-8"
                 onClick={() => {
                   setSearchTerm('');
@@ -486,19 +595,19 @@ const Services = () => {
         </div>
 
         {/* Mockup-perfect decorative icon placement - refined position & floating animation */}
-        <div 
+        <div
           ref={decorationRef}
           className="absolute bottom-0 right-4 md:right-10 lg:right-16 translate-y-[5%] pointer-events-none hidden md:block"
         >
-          <img 
-            src="/facial.svg" 
-            alt="" 
+          <img
+            src="/facial.svg"
+            alt=""
             className="w-48 lg:w-72 h-auto object-contain opacity-40 grayscale"
             style={{ filter: 'brightness(0.7) contrast(1.2)' }}
           />
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );
