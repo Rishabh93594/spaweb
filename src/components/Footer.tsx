@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -8,16 +9,27 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <img 
-                src="/lgo.png" 
-                alt="Bella Vita Logo" 
-                className="h-10 w-auto object-contain brightness-0 invert opacity-90" 
+              <img
+                src="/lgo.png"
+                alt="Bella Vita Logo"
+                className="h-10 w-auto object-contain brightness-0 invert opacity-90"
               />
               <h3 className="text-xl font-medium text-white">Bella Vita</h3>
             </div>
-            <p className="text-white/60 text-sm">
+            <p className="text-white/60 text-sm mb-6">
               Your sanctuary for luxury wellness and rejuvenation in the heart of the city.
             </p>
+            <div className="flex items-center gap-4">
+              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 hover:text-primary transition-all duration-300">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 hover:text-primary transition-all duration-300">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="p-2 rounded-full bg-white/5 hover:bg-white/10 hover:text-primary transition-all duration-300">
+                <Twitter className="h-5 w-5" />
+              </a>
+            </div>
           </div>
           <div>
             <h4 className="font-medium text-white mb-4">Services</h4>

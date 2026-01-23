@@ -4,7 +4,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, Menu, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, Menu, X, Check, ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import massageImage1 from '@/assets/massage_1_1767783087775.png';
 import massageImage2 from '@/assets/massage_2_1767783110626.png';
@@ -36,6 +39,7 @@ const Homepage = () => {
   const servicesRef = useRef<HTMLElement>(null);
   const founderRef = useRef<HTMLElement>(null);
   const membershipRef = useRef<HTMLElement>(null);
+  const relaxationRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
@@ -52,13 +56,13 @@ const Homepage = () => {
         const heroElements = heroContentRef.current.children;
         gsap.fromTo(heroElements,
           { y: 60, opacity: 0 },
-          { 
-            y: 0, 
-            opacity: 1, 
-            duration: 1.5, 
-            stagger: 0.3, 
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.5,
+            stagger: 0.3,
             ease: "power3.out",
-            delay: 0.5 
+            delay: 0.5
           }
         );
       }
@@ -67,7 +71,7 @@ const Homepage = () => {
       if (servicesRef.current) {
         const serviceCards = servicesRef.current.querySelectorAll('.service-card');
         const sectionHeader = servicesRef.current.querySelector('.section-header');
-        
+
         // Header elegant slide and fade
         gsap.fromTo(sectionHeader,
           { y: 30, opacity: 0, filter: "blur(10px)" },
@@ -123,8 +127,8 @@ const Homepage = () => {
 
         memberCards.forEach((card, index) => {
           gsap.fromTo(card,
-            { 
-              y: 150, 
+            {
+              y: 150,
               opacity: 0,
               rotateX: -15,
             },
@@ -142,6 +146,41 @@ const Homepage = () => {
             }
           );
         });
+      }
+
+      // Relaxation Section - Split reveal
+      if (relaxationRef.current) {
+        const image = relaxationRef.current.querySelector('.relaxation-image');
+        const content = relaxationRef.current.querySelector('.relaxation-content');
+
+        gsap.fromTo(image,
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: relaxationRef.current,
+              start: "top 75%",
+            }
+          }
+        );
+
+        gsap.fromTo(content,
+          { x: 50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: 0.2,
+            scrollTrigger: {
+              trigger: relaxationRef.current,
+              start: "top 75%",
+            }
+          }
+        );
       }
 
       // Hero Elements Stagger
@@ -227,15 +266,15 @@ const Homepage = () => {
   return (
     <div className="min-h-screen bg-gradient-hero max-w-full overflow-x-hidden">
       <Navbar />
-      
+
       {/* Spacer removed for full viewport hero */}
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black/20">
-          <video 
+          <video
             ref={heroVideoRef}
-            src="/bellavitaspa.webm" 
+            src="/bellavitaspa.webm"
             autoPlay
             loop
             muted
@@ -245,7 +284,7 @@ const Homepage = () => {
           {/* Subtly intensified dark overlay for luxury feel and better text readability */}
           <div className="absolute inset-0 bg-black/45"></div>
         </div>
-        
+
         <div ref={heroContentRef} className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center hero-content">
           <Badge className="mb-6 bg-white/10 text-white border-white/20 px-3 py-1 md:px-4 md:py-2 text-[0.6rem] md:text-sha-caps backdrop-blur-sm tracking-[0.2em] md:tracking-widest">
             <Crown className="w-3 h-3 md:w-4 md:h-4 mr-2" />
@@ -256,7 +295,7 @@ const Homepage = () => {
             <span className="block text-white/90 italic font-serif">Secret Sanctuary</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-sm">
-            Indulge in bespoke treatments crafted with French elegance and precision. 
+            Indulge in bespoke treatments crafted with French elegance and precision.
             Your journey to ultimate wellness begins here.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -292,8 +331,8 @@ const Homepage = () => {
             {/* Massage Services */}
             <Card className="service-card group hover:shadow-luxury transition-all duration-500 border-0 bg-card/80 backdrop-blur-sm flex flex-col h-full">
               <div className="relative overflow-hidden rounded-t-lg shrink-0">
-                <Carousel 
-                  className="w-full" 
+                <Carousel
+                  className="w-full"
                   opts={{ loop: true }}
                   plugins={[
                     Autoplay({
@@ -304,9 +343,9 @@ const Homepage = () => {
                   <CarouselContent>
                     {[massageImage1, massageImage2, massageImage3].map((img, idx) => (
                       <CarouselItem key={idx}>
-                        <img 
-                          src={img} 
-                          alt={`Luxury massage therapy ${idx + 1}`} 
+                        <img
+                          src={img}
+                          alt={`Luxury massage therapy ${idx + 1}`}
                           className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       </CarouselItem>
@@ -346,8 +385,8 @@ const Homepage = () => {
             {/* Facial Services */}
             <Card className="service-card group hover:shadow-luxury transition-all duration-500 border-0 bg-card/80 backdrop-blur-sm flex flex-col h-full">
               <div className="relative overflow-hidden rounded-t-lg shrink-0">
-                <Carousel 
-                  className="w-full" 
+                <Carousel
+                  className="w-full"
                   opts={{ loop: true }}
                   plugins={[
                     Autoplay({
@@ -358,9 +397,9 @@ const Homepage = () => {
                   <CarouselContent>
                     {[facialImage1, facialImage2, facialImage3].map((img, idx) => (
                       <CarouselItem key={idx}>
-                        <img 
-                          src={img} 
-                          alt={`Luxury facial treatment ${idx + 1}`} 
+                        <img
+                          src={img}
+                          alt={`Luxury facial treatment ${idx + 1}`}
                           className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       </CarouselItem>
@@ -397,8 +436,8 @@ const Homepage = () => {
             {/* Body Treatments */}
             <Card className="service-card group hover:shadow-luxury transition-all duration-500 border-0 bg-card/80 backdrop-blur-sm flex flex-col h-full">
               <div className="relative overflow-hidden rounded-t-lg shrink-0">
-                <Carousel 
-                  className="w-full" 
+                <Carousel
+                  className="w-full"
                   opts={{ loop: true }}
                   plugins={[
                     Autoplay({
@@ -409,9 +448,9 @@ const Homepage = () => {
                   <CarouselContent>
                     {[bodyImage1, bodyImage2, bodyImage3].map((img, idx) => (
                       <CarouselItem key={idx}>
-                        <img 
-                          src={img} 
-                          alt={`Luxury body treatment ${idx + 1}`} 
+                        <img
+                          src={img}
+                          alt={`Luxury body treatment ${idx + 1}`}
                           className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       </CarouselItem>
@@ -536,33 +575,118 @@ const Homepage = () => {
           <div className="flex flex-col md:flex-row items-center gap-16">
             <div className="w-full md:w-1/2 relative founder-image">
               <div className="absolute -inset-4 bg-primary/5 rounded-2xl transform rotate-3"></div>
-              <img 
-                src="/valerie-moore.png" 
-                alt="Valerie Moore - Owner of Bella Vita Medi Spa" 
+              <img
+                src="/valerie-moore.png"
+                alt="Valerie Moore - Owner of Bella Vita Medi Spa"
                 className="relative z-10 w-full aspect-[4/5] object-cover rounded-xl shadow-luxury transition-transform duration-700 hover:scale-[1.02]"
               />
               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
             </div>
-            
+
             <div className="w-full md:w-1/2 founder-content">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">The Visionary</Badge>
               <h2 className="text-3xl md:text-4xl text-foreground mb-2">Valerie Moore</h2>
               <p className="text-[0.65rem] md:text-sha-caps text-primary font-medium tracking-[0.15em] md:tracking-widest mb-8">
                 Owner / Certified Massage Specialist
               </p>
-              
+
               <div className="relative">
                 <Quote className="absolute -top-4 md:-top-6 -left-4 md:-left-8 w-12 h-12 md:w-16 md:h-16 text-primary/10 -z-10 transform -scale-x-100" />
                 <p className="text-xl md:text-2xl text-foreground font-light leading-relaxed italic mb-8">
                   "I believe that true wellness lies in the balance of body and spirit. At Bella Vita Medi Spa, we don't just offer treatments; we curate journeys of transformation. Every touch, every scent, and every moment is dedicated to restoring your inner harmony and revealing your natural radiance."
                 </p>
               </div>
-              
+
               <div className="h-[1px] w-24 bg-accent mb-8"></div>
-              
+
               <Button variant="luxury" size="lg" className="w-full sm:w-auto" asChild>
                 <Link to="/about">Learn More About Our Story</Link>
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Relaxation Special Offer Section */}
+      <section ref={relaxationRef} className="py-24 px-6 bg-card/50 backdrop-blur-sm overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            {/* Image Side */}
+            <div className="w-full lg:w-1/2 relative relaxation-image">
+              <div className="absolute inset-0 bg-primary/10 rounded-2xl transform -rotate-3 scale-[1.02]"></div>
+              <img
+                src="/bellavitarelaxation.jpeg"
+                alt="Relaxation Foot Bath Massage"
+                className="relative z-10 w-full rounded-2xl shadow-2xl object-cover h-[500px] lg:h-[600px]"
+              />
+              <div className="absolute -bottom-6 -left-6 z-20 bg-background/95 backdrop-blur border border-border p-6 rounded-xl shadow-luxury max-w-xs">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/20 p-2 rounded-full text-primary">
+                    <Sparkles className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg mb-1">Limited Time Offer</h4>
+                    <p className="text-sm text-muted-foreground">Experience ultimate serenity at an exclusive price.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Content & Form Side */}
+            <div className="w-full lg:w-1/2 relaxation-content">
+              <Badge className="mb-6 bg-red-500/10 text-red-500 border-red-500/20 hover:bg-red-500/20 px-4 py-1.5 text-sm">
+                EXCLUSIVE OFFER
+              </Badge>
+              <h2 className="text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
+                Complete Relaxation <br />
+                <span className="text-primary italic font-serif">Foot Bath Massage</span>
+              </h2>
+
+              <div className="flex items-baseline gap-4 mb-8">
+                <span className="text-2xl text-muted-foreground line-through decoration-red-500/50 decoration-2">$85</span>
+                <span className="text-5xl font-bold text-primary">$45</span>
+                <span className="text-sm font-medium text-red-500 bg-red-500/10 px-2 py-1 rounded">-45% OFF</span>
+              </div>
+
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Step away from the chaos and immerse yourself in pure tranquility. Our signature Relaxation Foot Bath Massage
+                combines ancient healing traditions with modern luxury. Let the warm, aromatic waters soothe your tired feet
+                while our expert therapists melt away tension, leaving you feeling lighter, revitalized, and profoundly at peace.
+              </p>
+
+              <Card className="border-primary/20 bg-background/50 backdrop-blur shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-xl">Claim Your Discount</CardTitle>
+                  <CardDescription>Fill out the form below to lock in this special price.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form className="space-y-4" onSubmit={(e) => {
+                    e.preventDefault();
+                    toast.success("Offer claimed! We will contact you shortly to confirm your booking.");
+                  }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name</Label>
+                        <Input id="name" placeholder="Jane Doe" required className="bg-background/80" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input id="phone" type="tel" placeholder="(555) 123-4567" required className="bg-background/80" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address</Label>
+                      <Input id="email" type="email" placeholder="jane@example.com" required className="bg-background/80" />
+                    </div>
+                    <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg h-12">
+                      Get Offer Now <ArrowRight className="w-5 h-5 ml-2" />
+                    </Button>
+                    <p className="text-xs text-center text-muted-foreground mt-4">
+                      *Offer valid for new customers only. Limited availability.
+                    </p>
+                  </form>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
