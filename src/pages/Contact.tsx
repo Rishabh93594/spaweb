@@ -1,17 +1,18 @@
 import React, { useRef, useLayoutEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
-  Instagram, 
-  Facebook, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  Instagram,
+  Facebook,
   Twitter,
   MessageSquare
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '@/components/Navbar';
@@ -25,6 +26,28 @@ const Contact = () => {
   const contactGridRef = useRef<HTMLDivElement>(null);
   const decorationRef = useRef<HTMLDivElement>(null);
 
+  const [formData, setFormData] = React.useState({
+    name: '',
+    email: '',
+    phone: '',
+    reason: 'Signature Massage',
+    message: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone) {
+      toast.error("Please fill in all mandatory fields: Name, Phone, and Email.");
+      return;
+    }
+    toast.success("Inquiry sent successfully! We will contact you shortly.");
+    setFormData({ name: '', email: '', phone: '', reason: 'Signature Massage', message: '' });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Header Animation
@@ -32,12 +55,12 @@ const Contact = () => {
       if (headerElements) {
         gsap.fromTo(headerElements,
           { opacity: 0, y: 30 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1.2, 
-            stagger: 0.2, 
-            ease: "power3.out" 
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.2,
+            ease: "power3.out"
           }
         );
       }
@@ -102,7 +125,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gradient-hero overflow-x-hidden">
       <Navbar forceOpaque={true} />
-      
+
       {/* Hero Header */}
       <section ref={headerRef} className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="max-w-7xl mx-auto text-center">
@@ -123,7 +146,7 @@ const Contact = () => {
       <section className="py-20 px-6 px-6">
         <div className="max-w-7xl mx-auto">
           <div ref={contactGridRef} className="grid lg:grid-cols-5 gap-16">
-            
+
             {/* Contact Info */}
             <div className="lg:col-span-2 space-y-12">
               <div className="space-y-8">
@@ -155,29 +178,52 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="lg:col-span-3">
               <div className="bg-white/40 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-luxury border border-white/20">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Full Name</label>
-                      <input 
-                        type="text" 
+                      <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Full Name <span className="text-red-500">*</span></label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light"
                         placeholder="Jean-Luc Picard"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Email Address</label>
-                      <input 
-                        type="email" 
+                      <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Email Address <span className="text-red-500">*</span></label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light"
                         placeholder="jeanluc@enterprise.com"
                       />
                     </div>
                   </div>
-                  
+
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Phone Number <span className="text-red-500">*</span></label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light"
+                      placeholder="+33 1 23 45 67 89"
+                    />
+                  </div>
+
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Interested Ritual</label>
-                    <select className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light appearance-none backdrop-blur-md">
+                    <select
+                      name="reason"
+                      value={formData.reason}
+                      onChange={handleChange}
+                      className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light appearance-none backdrop-blur-md"
+                    >
                       <option>Signature Massage</option>
                       <option>Radiance Facial</option>
                       <option>Body Journey</option>
@@ -188,13 +234,16 @@ const Contact = () => {
 
                   <div className="space-y-2">
                     <label className="text-xs uppercase tracking-widest font-medium text-muted-foreground ml-1">Your Message</label>
-                    <textarea 
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       className="w-full bg-white/50 border border-border/50 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-light min-h-[150px] resize-none"
                       placeholder="Tell us about your wellness goals..."
                     ></textarea>
                   </div>
 
-                  <Button variant="hero" size="xl" className="w-full rounded-2xl h-14 shadow-luxury hover:scale-[1.02] transition-all duration-500 group">
+                  <Button type="submit" variant="hero" size="xl" className="w-full rounded-2xl h-14 shadow-luxury hover:scale-[1.02] transition-all duration-500 group">
                     Send Inquiry
                     <Send className="w-4 h-4 ml-3 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
                   </Button>
@@ -208,13 +257,13 @@ const Contact = () => {
 
       {/* Decorative SVG placement */}
       <section className="relative h-64 overflow-hidden">
-        <div 
+        <div
           ref={decorationRef}
           className="absolute bottom-0 right-4 md:right-10 lg:right-16 translate-y-[5%] pointer-events-none hidden md:block"
         >
-          <img 
-            src="/items.svg" 
-            alt="" 
+          <img
+            src="/items.svg"
+            alt=""
             className="w-36 lg:w-48 h-auto object-contain opacity-15 grayscale"
             style={{ filter: 'brightness(0.6) contrast(1.1)' }}
           />

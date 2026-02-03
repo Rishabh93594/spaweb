@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, Menu, X, Check, ArrowRight } from 'lucide-react';
+import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, ArrowRight, Carousel as CarouselIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import massageImage1 from '@/assets/massage_1_1767783087775.png';
@@ -41,6 +41,12 @@ const Homepage = () => {
   const membershipRef = useRef<HTMLElement>(null);
   const relaxationRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
+
+  const [offerForm, setOfferForm] = React.useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -267,8 +273,6 @@ const Homepage = () => {
     <div className="min-h-screen bg-gradient-hero max-w-full overflow-x-hidden">
       <Navbar />
 
-      {/* Spacer removed for full viewport hero */}
-
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black/20">
@@ -281,7 +285,6 @@ const Homepage = () => {
             playsInline
             className="w-full h-full object-cover"
           />
-          {/* Subtly intensified dark overlay for luxury feel and better text readability */}
           <div className="absolute inset-0 bg-black/45"></div>
         </div>
 
@@ -569,45 +572,7 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Meet the Founder Section */}
-      <section ref={founderRef} className="py-24 px-6 bg-gradient-secondary overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-16">
-            <div className="w-full md:w-1/2 relative founder-image">
-              <div className="absolute -inset-4 bg-primary/5 rounded-2xl transform rotate-3"></div>
-              <img
-                src="/valerie-moore.png"
-                alt="Valerie Moore - Owner of Bella Vita Medi Spa"
-                className="relative z-10 w-full aspect-[4/5] object-cover rounded-xl shadow-luxury transition-transform duration-700 hover:scale-[1.02]"
-              />
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
-            </div>
-
-            <div className="w-full md:w-1/2 founder-content">
-              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">The Visionary</Badge>
-              <h2 className="text-3xl md:text-4xl text-foreground mb-2">Valerie Moore</h2>
-              <p className="text-[0.65rem] md:text-sha-caps text-primary font-medium tracking-[0.15em] md:tracking-widest mb-8">
-                Owner / Certified Massage Specialist
-              </p>
-
-              <div className="relative">
-                <Quote className="absolute -top-4 md:-top-6 -left-4 md:-left-8 w-12 h-12 md:w-16 md:h-16 text-primary/10 -z-10 transform -scale-x-100" />
-                <p className="text-xl md:text-2xl text-foreground font-light leading-relaxed italic mb-8">
-                  "I believe that true wellness lies in the balance of body and spirit. At Bella Vita Medi Spa, we don't just offer treatments; we curate journeys of transformation. Every touch, every scent, and every moment is dedicated to restoring your inner harmony and revealing your natural radiance."
-                </p>
-              </div>
-
-              <div className="h-[1px] w-24 bg-accent mb-8"></div>
-
-              <Button variant="luxury" size="lg" className="w-full sm:w-auto" asChild>
-                <Link to="/about">Learn More About Our Story</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Relaxation Special Offer Section */}
+      {/* Relaxation Special Offer Section - MOVED HERE (Before Founder) */}
       <section ref={relaxationRef} className="py-24 px-6 bg-card/50 backdrop-blur-sm overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
@@ -662,24 +627,51 @@ const Homepage = () => {
                 <CardContent>
                   <form className="space-y-4" onSubmit={(e) => {
                     e.preventDefault();
-                    toast.success("Offer claimed! We will contact you shortly to confirm your booking.");
+                    if (!offerForm.name || !offerForm.email || !offerForm.phone) {
+                      toast.error("Please fill in all mandatory fields to claim this offer.");
+                      return;
+                    }
+                    // Redirect to booking with special offer
+                    window.location.href = "/booking?service=foot-bath-special";
                   }}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" placeholder="Jane Doe" required className="bg-background/80" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" type="tel" placeholder="(555) 123-4567" required className="bg-background/80" />
-                      </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="offer-name">Full Name <span className="text-red-500">*</span></Label>
+                      <Input
+                        id="offer-name"
+                        placeholder="Your Name"
+                        className="bg-white/80"
+                        value={offerForm.name}
+                        onChange={(e) => setOfferForm({ ...offerForm, name: e.target.value })}
+                        required
+                      />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" placeholder="jane@example.com" required className="bg-background/80" />
+                      <Label htmlFor="offer-email">Email Address <span className="text-red-500">*</span></Label>
+                      <Input
+                        id="offer-email"
+                        type="email"
+                        placeholder="your@email.com"
+                        className="bg-white/80"
+                        value={offerForm.email}
+                        onChange={(e) => setOfferForm({ ...offerForm, email: e.target.value })}
+                        required
+                      />
                     </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="offer-phone">Phone Number <span className="text-red-500">*</span></Label>
+                      <Input
+                        id="offer-phone"
+                        type="tel"
+                        placeholder="+1 234 567 890"
+                        className="bg-white/80"
+                        value={offerForm.phone}
+                        onChange={(e) => setOfferForm({ ...offerForm, phone: e.target.value })}
+                        required
+                      />
+                    </div>
+
                     <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg h-12">
-                      Get Offer Now <ArrowRight className="w-5 h-5 ml-2" />
+                      Get This Offer <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                     <p className="text-xs text-center text-muted-foreground mt-4">
                       *Offer valid for new customers only. Limited availability.
@@ -692,6 +684,44 @@ const Homepage = () => {
         </div>
       </section>
 
+      {/* Meet the Founder Section */}
+      <section ref={founderRef} className="py-24 px-6 bg-gradient-secondary overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-16">
+            <div className="w-full md:w-1/2 relative founder-image">
+              <div className="absolute -inset-4 bg-primary/5 rounded-2xl transform rotate-3"></div>
+              <img
+                src="/valerie-moore.png"
+                alt="Valerie Moore - Owner of Forever Young NYC"
+                className="relative z-10 w-full aspect-[4/5] object-cover rounded-xl shadow-luxury transition-transform duration-700 hover:scale-[1.02]"
+              />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div className="w-full md:w-1/2 founder-content">
+              <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">The Visionary</Badge>
+              <h2 className="text-3xl md:text-4xl text-foreground mb-2">Valerie Moore</h2>
+              <p className="text-[0.65rem] md:text-sha-caps text-primary font-medium tracking-[0.15em] md:tracking-widest mb-8">
+                Owner / Certified Massage Specialist
+              </p>
+
+              <div className="relative">
+                <Quote className="absolute -top-4 md:-top-6 -left-4 md:-left-8 w-12 h-12 md:w-16 md:h-16 text-primary/10 -z-10 transform -scale-x-100" />
+                <p className="text-xl md:text-2xl text-foreground font-light leading-relaxed italic mb-8">
+                  "I believe that true wellness lies in the balance of body and spirit. At Forever Young NYC, we don't just offer treatments; we curate journeys of transformation. Every touch, every scent, and every moment is dedicated to restoring your inner harmony and revealing your natural radiance."
+                </p>
+              </div>
+
+              <div className="h-[1px] w-24 bg-accent mb-8"></div>
+
+              <Button variant="luxury" size="lg" className="w-full sm:w-auto" asChild>
+                <Link to="/about">Learn More About Our Story</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section ref={ctaRef} className="py-20 px-6 bg-primary/5 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto text-center cta-content">
@@ -699,7 +729,7 @@ const Homepage = () => {
             Ready to Begin Your Journey?
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Book your first appointment and discover the Bella Vita difference
+            Book your first appointment and discover the Forever Young NYC difference
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="hero" size="xl" className="text-white" asChild>
