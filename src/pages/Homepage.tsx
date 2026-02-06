@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, ArrowRight, Carousel as CarouselIcon } from 'lucide-react';
+import { Sparkles, Clock, Star, Heart, Gift, Crown, Quote, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import massageImage1 from '@/assets/massage_1_1767783087775.png';
@@ -365,8 +365,8 @@ const Homepage = () => {
               </div>
               <div className="flex flex-col flex-grow">
                 <CardHeader>
-                  <CardTitle className="text-xl">Signature Massage</CardTitle>
-                  <CardDescription className="min-h-[3rem]">Personalized therapeutic massage tailored to your needs and physical state</CardDescription>
+                  <CardTitle className="text-xl">Post Op Lymphatic Drainage Massage</CardTitle>
+                  <CardDescription className="min-h-[3rem]">Specialized technique designed to reduce swelling and accelerate recovery after surgery</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow justify-between">
                   <div className="flex items-center justify-between mb-6">
@@ -374,10 +374,10 @@ const Homepage = () => {
                       <Clock className="w-4 h-4 mr-1" />
                       60-90 min
                     </span>
-                    <span className="text-primary font-semibold">From €120</span>
+                    <span className="text-primary font-semibold">From $150</span>
                   </div>
                   <Button variant="spa" className="w-full mt-auto" asChild>
-                    <Link to="/booking?service=signature-massage">
+                    <Link to="/booking?service=lymphatic-drainage">
                       Book Treatment
                     </Link>
                   </Button>
@@ -398,11 +398,11 @@ const Homepage = () => {
                   ]}
                 >
                   <CarouselContent>
-                    {[facialImage1, facialImage2, facialImage3].map((img, idx) => (
+                    {[massageImage1, massageImage2, massageImage3].map((img, idx) => (
                       <CarouselItem key={idx}>
                         <img
                           src={img}
-                          alt={`Luxury facial treatment ${idx + 1}`}
+                          alt={`Swedish Massage ${idx + 1}`}
                           className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                         />
                       </CarouselItem>
@@ -416,19 +416,19 @@ const Homepage = () => {
               </div>
               <div className="flex flex-col flex-grow">
                 <CardHeader>
-                  <CardTitle className="text-xl">Radiance Facial</CardTitle>
-                  <CardDescription className="min-h-[3rem]">Advanced skincare treatments for luminous and healthy skin</CardDescription>
+                  <CardTitle className="text-xl">Swedish Massage</CardTitle>
+                  <CardDescription className="min-h-[3rem]">Classic relaxation technique using long, smooth strokes to separate and lengthen muscle fibers</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow justify-between">
                   <div className="flex items-center justify-between mb-6">
                     <span className="flex items-center text-muted-foreground">
                       <Clock className="w-4 h-4 mr-1" />
-                      75 min
+                      60-90 min
                     </span>
-                    <span className="text-primary font-semibold">From €95</span>
+                    <span className="text-primary font-semibold">From $120</span>
                   </div>
                   <Button variant="spa" className="w-full mt-auto" asChild>
-                    <Link to="/booking?service=radiance-facial">
+                    <Link to="/booking?service=swedish-massage">
                       Book Treatment
                     </Link>
                   </Button>
@@ -467,25 +467,32 @@ const Homepage = () => {
               </div>
               <div className="flex flex-col flex-grow">
                 <CardHeader>
-                  <CardTitle className="text-xl">Body Renewal</CardTitle>
-                  <CardDescription className="min-h-[3rem]">Comprehensive body treatments using premium minerals and oils</CardDescription>
+                  <CardTitle className="text-xl">Deep Tissue Massage</CardTitle>
+                  <CardDescription className="min-h-[3rem]">Intense pressure therapy targeting deep muscle layers to release chronic tension and knots</CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow justify-between">
                   <div className="flex items-center justify-between mb-6">
                     <span className="flex items-center text-muted-foreground">
                       <Clock className="w-4 h-4 mr-1" />
-                      90 min
+                      60-90 min
                     </span>
-                    <span className="text-primary font-semibold">From €150</span>
+                    <span className="text-primary font-semibold">From $160</span>
                   </div>
                   <Button variant="spa" className="w-full mt-auto" asChild>
-                    <Link to="/booking?service=himalayan-scrub">
+                    <Link to="/booking?service=deep-tissue">
                       Book Treatment
                     </Link>
                   </Button>
                 </CardContent>
               </div>
             </Card>
+          </div>
+          <div className="mt-16 text-center">
+            <Button variant="luxury" size="xl" className="min-w-[200px]" asChild>
+              <Link to="/services">
+                View All Services
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -510,7 +517,7 @@ const Homepage = () => {
                 <CardHeader className="text-center pb-2">
                   <Badge className="mx-auto mb-2 bg-muted text-muted-foreground w-fit">Silver</Badge>
                   <CardTitle className="text-2xl">Wellness Member</CardTitle>
-                  <div className="text-3xl font-bold text-primary">€79<span className="text-base text-muted-foreground">/month</span></div>
+                  <div className="text-3xl font-bold text-primary">$79<span className="text-base text-muted-foreground">/month</span></div>
                 </CardHeader>
                 <CardContent className="space-y-4 flex flex-col flex-grow">
                   <ul className="space-y-2 text-sm flex-grow">
@@ -519,7 +526,9 @@ const Homepage = () => {
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Monthly wellness consultation</li>
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Complimentary amenities</li>
                   </ul>
-                  <Button variant="elegant" className="w-full mt-auto">Choose Silver</Button>
+                  <Button variant="elegant" className="w-full mt-auto" asChild>
+                    <Link to="/contact">Choose Silver</Link>
+                  </Button>
                 </CardContent>
               </div>
             </Card>
@@ -533,7 +542,7 @@ const Homepage = () => {
                 <CardHeader className="text-center pb-2">
                   <Badge className="mx-auto mb-2 bg-primary text-primary-foreground w-fit">Gold</Badge>
                   <CardTitle className="text-2xl">Luxury Member</CardTitle>
-                  <div className="text-3xl font-bold text-primary">€149<span className="text-base text-muted-foreground">/month</span></div>
+                  <div className="text-3xl font-bold text-primary">$149<span className="text-base text-muted-foreground">/month</span></div>
                 </CardHeader>
                 <CardContent className="space-y-4 flex flex-col flex-grow">
                   <ul className="space-y-2 text-sm flex-grow">
@@ -543,7 +552,9 @@ const Homepage = () => {
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Guest privileges</li>
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Personal wellness advisor</li>
                   </ul>
-                  <Button variant="hero" className="w-full mt-auto">Choose Gold</Button>
+                  <Button variant="hero" className="w-full mt-auto" asChild>
+                    <Link to="/contact">Choose Gold</Link>
+                  </Button>
                 </CardContent>
               </div>
             </Card>
@@ -554,7 +565,7 @@ const Homepage = () => {
                 <CardHeader className="text-center pb-2">
                   <Badge className="mx-auto mb-2 bg-gradient-primary text-primary-foreground w-fit">Platinum</Badge>
                   <CardTitle className="text-2xl">Elite Member</CardTitle>
-                  <div className="text-3xl font-bold text-primary">€299<span className="text-base text-muted-foreground">/month</span></div>
+                  <div className="text-3xl font-bold text-primary">$299<span className="text-base text-muted-foreground">/month</span></div>
                 </CardHeader>
                 <CardContent className="space-y-4 flex flex-col flex-grow">
                   <ul className="space-y-2 text-sm flex-grow">
@@ -564,7 +575,9 @@ const Homepage = () => {
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Exclusive events</li>
                     <li className="flex items-center"><Star className="w-4 h-4 text-primary mr-2" />Personal therapist</li>
                   </ul>
-                  <Button variant="luxury" className="w-full mt-auto">Choose Platinum</Button>
+                  <Button variant="luxury" className="w-full mt-auto" asChild>
+                    <Link to="/contact">Choose Platinum</Link>
+                  </Button>
                 </CardContent>
               </div>
             </Card>
@@ -580,8 +593,8 @@ const Homepage = () => {
             <div className="w-full lg:w-1/2 relative relaxation-image">
               <div className="absolute inset-0 bg-primary/10 rounded-2xl transform -rotate-3 scale-[1.02]"></div>
               <img
-                src="/bellavitarelaxation.jpeg"
-                alt="Relaxation Foot Bath Massage"
+                src="/bella.png"
+                alt="Relaxation Ionic Foot Massage"
                 className="relative z-10 w-full rounded-2xl shadow-2xl object-cover h-[500px] lg:h-[600px]"
               />
               <div className="absolute -bottom-6 -left-6 z-20 bg-background/95 backdrop-blur border border-border p-6 rounded-xl shadow-luxury max-w-xs">
@@ -604,7 +617,7 @@ const Homepage = () => {
               </Badge>
               <h2 className="text-4xl lg:text-5xl text-foreground mb-6 leading-tight">
                 Complete Relaxation <br />
-                <span className="text-primary italic font-serif">Foot Bath Massage</span>
+                <span className="text-primary italic font-serif">Ionic Foot Massage</span>
               </h2>
 
               <div className="flex items-baseline gap-4 mb-8">
@@ -614,7 +627,7 @@ const Homepage = () => {
               </div>
 
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Step away from the chaos and immerse yourself in pure tranquility. Our signature Relaxation Foot Bath Massage
+                Step away from the chaos and immerse yourself in pure tranquility. Our signature Relaxation Ionic Foot Massage
                 combines ancient healing traditions with modern luxury. Let the warm, aromatic waters soothe your tired feet
                 while our expert therapists melt away tension, leaving you feeling lighter, revitalized, and profoundly at peace.
               </p>

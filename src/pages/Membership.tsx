@@ -2,16 +2,16 @@ import React, { useRef, useLayoutEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Check, 
-  Crown, 
-  Star, 
-  Sparkles, 
-  Heart, 
-  ArrowRight, 
-  Gift, 
-  GlassWater, 
-  Gem, 
+import {
+  Check,
+  Crown,
+  Star,
+  Sparkles,
+  Heart,
+  ArrowRight,
+  Gift,
+  GlassWater,
+  Gem,
   Calendar,
   Clock,
   ShieldCheck
@@ -123,7 +123,7 @@ const Membership = () => {
       image: goldImg,
       badge: 'Signature',
       popular: true,
-      description: 'Our most coveted tier, offering the complete Bella Vita experience.',
+      description: 'Our most coveted tier, offering the complete Forever Young NYC experience.',
       features: [
         '2 Signature Rituals per month',
         'Priority weekend booking',
@@ -202,7 +202,7 @@ const Membership = () => {
             A Sanctuary of <span className="italic font-serif text-primary">Belonging</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light mb-12">
-            Elevate your wellness from an occasional luxury to a lifestyle. Join the Bella Vita Circle and immerse yourself in consistent, personalized care.
+            Elevate your wellness from an occasional luxury to a lifestyle. Join the Forever Young NYC Circle and immerse yourself in consistent, personalized care.
           </p>
         </div>
       </section>
@@ -212,8 +212,8 @@ const Membership = () => {
         <div className="max-w-7xl mx-auto">
           <div ref={tiersRef} className="grid md:grid-cols-3 gap-10">
             {tiers.map((tier) => (
-              <Card 
-                key={tier.name} 
+              <Card
+                key={tier.name}
                 className={`tier-card relative group border-0 bg-white/40 backdrop-blur-md overflow-hidden flex flex-col h-full rounded-2xl transition-all duration-700 hover:shadow-luxury ${tier.popular ? 'ring-2 ring-primary/20 scale-105 z-10' : ''}`}
               >
                 {tier.popular && (
@@ -221,10 +221,10 @@ const Membership = () => {
                     Most Coveted
                   </div>
                 )}
-                
+
                 <div className="relative aspect-video overflow-hidden">
-                  <img 
-                    src={tier.image} 
+                  <img
+                    src={tier.image}
                     alt={tier.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
                   />
@@ -236,7 +236,7 @@ const Membership = () => {
 
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="flex items-baseline mb-6">
-                    <span className="text-4xl text-primary font-normal">€{tier.price}</span>
+                    <span className="text-4xl text-primary font-normal">${tier.price}</span>
                     <span className="text-muted-foreground text-sm ml-2">/ month</span>
                   </div>
 
@@ -253,12 +253,15 @@ const Membership = () => {
                     ))}
                   </ul>
 
-                  <Button 
-                    variant={tier.popular ? "hero" : "luxury"} 
+                  <Button
+                    variant={tier.popular ? "hero" : "luxury"}
                     className="w-full rounded-full h-12 shadow-soft hover:shadow-medium transition-all duration-500 group/btn"
+                    asChild
                   >
-                    Select {tier.name}
-                    <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300" />
+                    <Link to="/contact">
+                      Select {tier.name}
+                      <ArrowRight className="w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300" />
+                    </Link>
                   </Button>
                 </div>
               </Card>
@@ -274,7 +277,7 @@ const Membership = () => {
             <h2 className="text-4xl md:text-5xl text-foreground font-light mb-6">Exclusive <span className="italic font-serif text-primary">Circle Perks</span></h2>
             <div className="w-20 h-px bg-primary/30 mx-auto"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
             {perks.map((perk, i) => (
               <div key={i} className="perk-item flex gap-6">
@@ -313,13 +316,13 @@ const Membership = () => {
         </div>
 
         {/* Decorative items icon placement - matching Services page style */}
-        <div 
+        <div
           ref={decorationRef}
           className="absolute bottom-0 right-4 md:right-10 lg:right-16 translate-y-[5%] pointer-events-none hidden md:block"
         >
-          <img 
-            src="/items.svg" 
-            alt="" 
+          <img
+            src="/items.svg"
+            alt=""
             className="w-36 lg:w-48 h-auto object-contain opacity-15 grayscale"
             style={{ filter: 'brightness(0.6) contrast(1.1)' }}
           />

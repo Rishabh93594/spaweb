@@ -11,10 +11,10 @@ const Footer = () => {
             <div className="flex items-center space-x-3 mb-6">
               <img
                 src="/lgo.png"
-                alt="Bella Vita Logo"
+                alt="Forever Young NYC Logo"
                 className="h-10 w-auto object-contain brightness-0 invert opacity-90"
               />
-              <h3 className="text-xl font-medium text-white">Bella Vita</h3>
+              <h3 className="text-3xl font-bold text-white tracking-widest">FOREVER YOUNG NYC</h3>
             </div>
             <p className="text-white/60 text-sm mb-6">
               Your sanctuary for luxury wellness and rejuvenation in the heart of the city.
@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-white/5 pt-8 text-center text-sm text-white/40">
-          <p>&copy; 2024 Bella Vita Medi Spa. All rights reserved.</p>
+          <p>&copy; 2024 Forever Young NYC. All rights reserved.</p>
         </div>
       </div>
     </footer>

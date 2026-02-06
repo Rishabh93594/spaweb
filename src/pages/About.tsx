@@ -2,13 +2,13 @@ import React, { useRef, useLayoutEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Sparkles, 
-  Crown, 
-  Heart, 
-  Quote, 
-  History, 
-  Target, 
+import {
+  Sparkles,
+  Crown,
+  Heart,
+  Quote,
+  History,
+  Target,
   Award,
   ArrowRight
 } from 'lucide-react';
@@ -43,11 +43,11 @@ const About = () => {
       if (headerElements) {
         gsap.fromTo(headerElements,
           { opacity: 0, y: 30 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1.2, 
-            stagger: 0.2, 
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.2,
             ease: "power3.out",
             delay: 0.5
           }
@@ -90,7 +90,7 @@ const About = () => {
       if (founderRef.current) {
         const image = founderRef.current.querySelector('.founder-image');
         const content = founderRef.current.querySelector('.founder-content')?.children;
-        
+
         if (image) {
           gsap.from(image, {
             x: -50,
@@ -103,7 +103,7 @@ const About = () => {
             }
           });
         }
-        
+
         if (content) {
           gsap.from(content, {
             x: 50,
@@ -175,13 +175,13 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gradient-hero overflow-x-hidden">
       <Navbar forceOpaque={true} />
-      
+
       {/* Video Hero Header */}
       <section ref={headerRef} className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-black/20">
-          <video 
+          <video
             ref={heroVideoRef}
-            src="/bellavitaspa.webm" 
+            src="/bellavitaspa.webm"
             autoPlay
             loop
             muted
@@ -190,14 +190,14 @@ const About = () => {
           />
           <div className="absolute inset-0 bg-black/45"></div>
         </div>
-        
+
         <div ref={heroContentRef} className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <Badge className="mb-6 bg-white/10 text-white border-white/20 px-4 py-1 text-sha-caps backdrop-blur-sm tracking-[0.2em]">
             <History className="w-3 h-3 mr-2" />
             Our Legacy
           </Badge>
           <h1 className="text-5xl md:text-7xl text-white mb-6 leading-tight font-normal drop-shadow-md">
-            The Story of <span className="italic font-serif">Bella Vita</span>
+            The Story of <span className="italic font-serif">Forever Young NYC</span>
           </h1>
           <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-light drop-shadow-sm">
             A journey born from a passion for timeless elegance and the art of transformative wellness.
@@ -213,20 +213,20 @@ const About = () => {
           <div className="flex flex-col md:flex-row items-center gap-16">
             <div className="w-full md:w-1/2 relative founder-image">
               <div className="absolute -inset-4 bg-white/40 backdrop-blur-sm rounded-2xl transform rotate-3 -z-10 shadow-soft"></div>
-              <img 
-                src="/valerie-moore.png" 
-                alt="Valerie Moore" 
+              <img
+                src="/valerie-moore.png"
+                alt="Valerie Moore"
                 className="w-full aspect-[4/5] object-cover rounded-xl shadow-luxury"
               />
             </div>
-            
+
             <div className="w-full md:w-1/2 founder-content">
               <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">The Visionary</Badge>
               <h2 className="text-4xl text-foreground mb-4">Valerie Moore</h2>
               <p className="text-sha-caps text-primary font-medium tracking-widest mb-8">
                 Founder & Lead Specialist
               </p>
-              
+
               <div className="relative mb-12">
                 <Quote className="absolute -top-6 -left-8 w-16 h-16 text-primary/10 -z-10" />
                 <p className="text-2xl text-foreground font-light leading-relaxed italic">
@@ -252,10 +252,10 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">Our Values</Badge>
-            <h2 className="text-4xl md:text-5xl text-foreground font-light mb-6">The <span className="italic font-serif text-primary">Bella Vita Philosophy</span></h2>
+            <h2 className="text-4xl md:text-5xl text-foreground font-light mb-6">The <span className="italic font-serif text-primary">Forever Young NYC Philosophy</span></h2>
             <div className="w-20 h-px bg-primary/30 mx-auto"></div>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-10">
             {philosophy.map((item, i) => (
               <Card key={i} className="philosophy-card group border-0 bg-primary/5 hover:bg-white transition-all duration-700 hover:shadow-luxury rounded-2xl">
@@ -297,13 +297,13 @@ const About = () => {
         </div>
 
         {/* Decorative SVG placement */}
-        <div 
+        <div
           ref={decorationRef}
           className="absolute bottom-0 right-4 md:right-10 lg:right-16 translate-y-[5%] pointer-events-none hidden md:block"
         >
-          <img 
-            src="/items.svg" 
-            alt="" 
+          <img
+            src="/items.svg"
+            alt=""
             className="w-36 lg:w-48 h-auto object-contain opacity-15 grayscale"
             style={{ filter: 'brightness(0.6) contrast(1.1)' }}
           />
