@@ -34,14 +34,32 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) {
       toast.error("Please fill in all mandatory fields: Name, Phone, and Email.");
       return;
     }
-    toast.success("Inquiry sent successfully! We will contact you shortly.");
-    setFormData({ name: '', email: '', phone: '', reason: 'Signature Massage', message: '' });
+
+    try {
+      const response = await fetch('http://localhost:5000/api/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send inquiry');
+      }
+
+      toast.success("Inquiry sent successfully! We will contact you shortly.");
+      setFormData({ name: '', email: '', phone: '', reason: 'Signature Massage', message: '' });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send inquiry. Please try again later.");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -113,7 +131,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'General Inquiries',
-      detail: 'concierge@bellavita.spa',
+      detail: 'concierge@foreveryoung.nyc',
     },
     {
       icon: Clock,

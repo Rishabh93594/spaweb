@@ -73,16 +73,43 @@ const Booking = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone || !formData.email) {
       toast.error("Please fill in all required fields");
       return;
     }
-    // In a real app, you would send data to backend here
-    setIsSubmitted(true);
-    window.scrollTo(0, 0);
-    toast.success("Request Submitted Details!");
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/appointments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          service: selectedService?.name || "Not Selected",
+          date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : "Not Selected",
+          time: selectedTime || "Not Selected",
+          phone: formData.phone,
+          email: formData.email,
+          notes: formData.notes,
+          amount: calculateTotal(),
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        window.scrollTo(0, 0);
+        toast.success("Request Submitted Successfully!");
+      } else {
+        const errorData = await response.json();
+        toast.error(`Submission failed: ${errorData.error || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Error submitting appointment:", error);
+      toast.error("Failed to connect to the server. Please try again later.");
+    }
   };
 
   const toggleAddOn = (id: string) => {
