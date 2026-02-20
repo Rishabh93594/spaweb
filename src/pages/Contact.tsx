@@ -42,7 +42,7 @@ const Contact = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/enquiries', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
